@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://b75t2inbhv6hd"]
+
+[ext_resource type="Script" uid="uid://bolpmk4xgtyc8" path="res://Scenes/Prefabs/feather.gd" id="1_0qujt"]
+[ext_resource type="Texture2D" uid="uid://bdil68e7puqme" path="res://Assets/Spritesheet/feather.png" id="1_e56v3"]
+[ext_resource type="Texture2D" uid="uid://621as0fwjhum" path="res://Assets/Textures/star_07.png" id="2_kswen"]
+
+[sub_resource type="Curve" id="Curve_0qujt"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.494709, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_fdqis"]
+offsets = PackedFloat32Array(0, 0.625, 0.98295456)
+colors = PackedColorArray(0.20054138, 0.8037612, 0.15003246, 1, 0, 0.9882353, 0, 1, 1, 1, 1, 0)
+
+[node name="Feather" type="Area2D" unique_id=399007301]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_0qujt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=501515901]
+polygon = PackedVector2Array(-28, 30, -29, 29, -24, 16, -26, 6, -24, -4, -19, -12, -18, -11, -18, -9, -13, -20, -6, -26, 2, -29, 3, -27, 2, -25, 12, -30, 22, -31, 29, -28, 29, -26, 22, -22, 15, -15, 12, -10, 15, -11, 16, -10, 16, -7, 13, -4, 8, 0, 6, 1, 9, 1, 9, 2, 7, 5, 3, 9, -1, 12, -6, 13, -3, 15, -4, 17, -11, 19, -18, 20, -20, 26)
+
+[node name="Feather" type="Sprite2D" parent="CollisionPolygon2D" unique_id=1793445894]
+scale = Vector2(0.123046786, 0.123046786)
+texture = ExtResource("1_e56v3")
+
+[node name="CoinSparkles" type="CPUParticles2D" parent="CollisionPolygon2D/Feather" unique_id=1849539858]
+amount = 5
+texture = ExtResource("2_kswen")
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 80.0
+damping_min = 0.5
+damping_max = 0.5
+scale_amount_min = 0.04
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_0qujt")
+color_ramp = SubResource("Gradient_fdqis")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

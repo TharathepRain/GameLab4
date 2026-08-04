@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dowsdxgm35dfb"]
+
+[ext_resource type="Script" uid="uid://cp0ow337qd6nf" path="res://Scenes/Prefabs/speed_potion.gd" id="1_1qn0b"]
+[ext_resource type="Texture2D" uid="uid://v3gsrw2p1vum" path="res://Assets/Spritesheet/Speed Potion.png" id="1_72jd3"]
+[ext_resource type="Texture2D" uid="uid://621as0fwjhum" path="res://Assets/Textures/star_07.png" id="3_xypx4"]
+
+[sub_resource type="Curve" id="Curve_qvt4o"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.494709, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_5jeyb"]
+offsets = PackedFloat32Array(0.625, 1)
+colors = PackedColorArray(2.117753e-06, 0.8717794, 0.80162704, 1, 1, 1, 1, 0)
+
+[node name="Speed" type="Area2D" unique_id=1126437170]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_1qn0b")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=930565414]
+polygon = PackedVector2Array(-16, -28, 20, -28, 32, -16, 32, -4, 24, 4, 24, 8, 28, 12, 32, 20, 32, 28, 28, 32, 0, 32, -24, 28, -24, 24, -28, 16, -28, 12, -36, 4, -36, 0, -32, -16, -32, -20)
+
+[node name="Boots" type="Sprite2D" parent="." unique_id=1021594761]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_72jd3")
+
+[node name="CoinSparkles" type="CPUParticles2D" parent="." unique_id=535893656]
+amount = 5
+texture = ExtResource("3_xypx4")
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 80.0
+damping_min = 0.5
+damping_max = 0.5
+scale_amount_min = 0.04
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_qvt4o")
+color_ramp = SubResource("Gradient_5jeyb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
